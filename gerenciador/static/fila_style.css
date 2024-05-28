@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    margin: 0;
+    font-family: 'Noto-Sans', sans-serif;;
+}
+
+.consultas-main{
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: white;
+}
+
+.nav-bar{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #005dcb;
+}
+
+.btn-voltar{
+    width: 40px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.nav-bar > h1{
+    color: white;
+    font-size: 18pt;
+    margin-left: 8px;
+    font-weight: 300;
+}
+
+.content-consultas{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table{
+    width: 70%;
+    height: 50%;
+    background: #F6F6F6;
+    border-radius: 15px;
+}

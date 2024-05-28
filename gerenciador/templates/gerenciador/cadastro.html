@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cadastro_style.css' %}">
+    <title>Cadastro do paciente</title>
+</head>
+<body>
+    <div class="main-agendar">
+        <div class="navbar">
+            <img src="{% static 'img/retornar.svg' %}" alt="usuario" id='btn-voltar'>
+            <h1>Cadastro do paciente</h1>
+          </div>
+        <div class="painel-cadastro">
+            <div id="card-formulario">
+                <form id="formulario" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
