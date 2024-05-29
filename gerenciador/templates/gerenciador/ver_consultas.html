@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/ver_consultas_style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ver_consultas_style.css' %}">
     <title>Ver consultas</title>
 </head>
 <body>
     <div class="consultas-main">
         <div class="nav-bar">
-            <a href="home.html"><img src="images/retornar.svg" alt="Voltar" class="btn-voltar"></a>
+            <a href="{% url 'home' %}"><img src="{% static 'img/retornar.svg' %}" alt="Voltar" class="btn-voltar"></a>
             <h1>Consultas marcadas</h1>
         </div>
         <div class="content-consultas">
@@ -42,80 +43,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <th scope="row">1</th>
-                  <td>João da Silva</td>
-                  <td>10 de maio de 2024, 10:30</td>
-                  <td>(75) 9.9999-8888</td>
-                  <td>joaosilva@gmail.com</td>
-                  <td>Não</td>
-                </tr>
-                
-                
+                {% for paciente in pacientes %}
+                  <tr class="dados-paciente">
+                    <td><input type="checkbox"></td>
+                    <th scope="row">{{ paciente.pk }}</th>
+                    <td>{{ paciente.nome }}</td>
+                    <td>{{ paciente.data_nascimento }}</td>
+                    <td> {{ paciente.telefone }} </td>
+                    <td> {{ paciente.email }} </td>
+                    <td> {{ paciente.prioridade }} </td>
+                  </tr>          
+                {% endfor %}
               </tbody>
             </table>
           </div>

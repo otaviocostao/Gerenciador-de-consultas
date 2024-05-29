@@ -30,8 +30,10 @@ body{
     font-weight: 300;
 }
 
-.navbar > img{
-    margin-left: 10px;
+.btn-voltar{
+    width: 40px;
+    padding: 6px;
+    cursor: pointer;
 }
 
 
@@ -51,12 +53,18 @@ body{
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.377);
 }
 
+#formulario{
+    
+}
+
 .btn-salvar{
-    width: 100px;
+    width: 10vw;
     font-size: 12pt;
+    padding: 7px;
     color: white;
     background-color: #005dcb;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.377);
+    cursor: pointer;
 }

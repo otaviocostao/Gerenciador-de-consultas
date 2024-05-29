@@ -10,21 +10,21 @@
 <body>
   <div class="main-home">
     <div class="navbar">
-      <img src="{% static 'img/retornar.svg' %}" alt="usuario" id='btn-voltar'>
+      <img src="{% static 'img/agenda.svg' %}" alt="usuario">
       <h1>Gerenciador de consultas</h1>
     </div>
     <div class="content-div">
       <div class="painel-botoes">
-        <a href="agendar.html"><button class="btn-home">Agendar consulta
+        <a href="{% url 'cadastro' %}"><button class="btn-home">Agendar consulta
         </button>
         </a>
-        <a href="ver_consultas.html">
+        <a href="{% url 'consultas' %}">
           <button class="btn-home">Consultas marcadas</button>
         </a>
-        <a href="fila_espera.html">
+        <a href="">
           <button class="btn-home">Fila de espera</button>
         </a>
-        <a href="ajustes.html">
+        <a href="">
           <button class="btn-home">Ajustes das consultas</button>
          </a>
       </div>

@@ -101,16 +101,45 @@ body{
     height: 85%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    overflow-x: auto; /* Adiciona rolagem horizontal para tabelas largas */
 }
 
-.table{
-    width: 90vw;
-    height: 65vh;
-    background: #F6F6F6;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.123);
-    border-radius: 15px;
-    justify-content: center;
-    align-items: center;
-    border: black;
+
+.table {
+    width: 90%;
+    border-collapse: collapse; /* Remove espaços entre as células */
+    margin: 20px 0; /* Adiciona espaço acima e abaixo da tabela */
+    font-size: 16px; /* Define o tamanho da fonte */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.table th, .table td {
+    padding: 12px 15px; /* Adiciona padding nas células */
+    border: 1px solid #ddd; /* Adiciona borda às células */
+    white-space: nowrap; /* Impede quebra de linha em células */
+}
+
+#cabecalho {
+    background-color: #f2f2f2; /* Define a cor de fundo do cabeçalho */
+}
+
+#cabecalho th {
+    font-weight: bold; /* Torna o texto do cabeçalho em negrito */
+}
+
+.dados-paciente {
+    border-bottom: 1px solid #ddd; /* Adiciona borda inferior às linhas do corpo */
+}
+
+.dados-paciente:nth-of-type(even) {
+    background-color: #f9f9f9; /* Adiciona cor de fundo às linhas pares */
+}
+
+.dados-paciente:hover {
+    background-color: #f1f1f1; /* Adiciona cor de fundo ao passar o mouse sobre as linhas */
+}
+
+.dados-paciente td input[type="checkbox"] {
+    cursor: pointer; /* Define o cursor do mouse ao passar sobre os checkboxes */
 }

@@ -15,3 +15,5 @@ class Paciente(models.Model):
     telefone = models.CharField(max_length=20, null=False, blank=False)
 
     email = models.CharField(max_length=100)
+
+    data_nascimento = models.DateField(null=False, blank=False)
