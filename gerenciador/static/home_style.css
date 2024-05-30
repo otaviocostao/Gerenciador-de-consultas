@@ -71,6 +71,10 @@ body{
     cursor: pointer;
 }
 
+.btn-home:hover{
+    background-color: #3175c8;
+}
+
 .user{
     margin: 10px;
     width: 15vw;

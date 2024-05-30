@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'dados_consulta_style.css' %}">
+        <title>Dados da consulta</title>
+    </head>
+    <body>
+        <div class="main">
+            <div class="card-dados">
+                <div class="div-imagem">
+                    <img src="{% static 'img/confirme.png' %}" alt="confirmado" id="img-confirmado">
+                </div>
+                <div class="div-mensagem">
+                    <div id="conteudo-mensagem">
+                        <h1>Consulta marcada!</h1>
+                        <p>A consulta na especialidade: </p>
+                        <p>Para o paciente: {{ paciente.nome }}</p>
+                        <p>Data: </p>
+                        <p>Está marcada na agenda de consultas.</p>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <a href="{% url 'home' %}"><button id="btn-voltar">Retornar ao menu</button></a>
+                    <a href="{% url 'agendar' %}"><button id="btn-agendar">Agendar outra consulta</button></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

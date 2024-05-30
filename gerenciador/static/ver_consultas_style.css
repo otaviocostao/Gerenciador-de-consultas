@@ -84,7 +84,7 @@ body{
     align-items: center;
 }
 
-#btn-desmarcar{
+.btn-desmarcar{
     width: 180px;
     margin-right: 80px;
     padding: 7px;
@@ -94,6 +94,10 @@ body{
     color: white;
     font-size: 12pt;
     cursor: pointer;
+}
+
+.btn-desmarcar:hover{
+    background: #fd6565;
 }
 
 .tabela{
