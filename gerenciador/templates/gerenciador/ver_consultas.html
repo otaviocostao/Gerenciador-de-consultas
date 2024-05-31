@@ -14,51 +14,68 @@
             <h1>Consultas marcadas</h1>
         </div>
         <div class="content-consultas">
-          <div class="painel">
-            <div class="filtros">
-              <label for="especialidade" id="label-esp">Especialidade: </label>
-              <select name="especialidade" id="sel-especialidade">
-                <option value="">Clínico geral</option>
-                <option value="">Oftalmologista</option>
-                <option value="">Dermatologista</option>
-              </select>
+            <div class="painel">
+                <div class="filtros">
+                    <form method="GET" action="{% url 'consultas' %}">
+                        <div>
+                            <label for="especialidade" class="label-esp">Especialidade: </label>
+                            <select name="especialidade" class="sel-especialidade" onchange="this.form.submit()">
+                                <option value="">Todas</option>
+                                <option value="Clínico geral" {% if request.GET.especialidade == "Clínico geral" %}selected{% endif %}>Clínico geral</option>
+                                <option value="Oftalmologista" {% if request.GET.especialidade == "Oftalmologista" %}selected{% endif %}>Oftalmologista</option>
+                                <option value="Dermatologista" {% if request.GET.especialidade == "Dermatologista" %}selected{% endif %}>Dermatologista</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="data_consulta" class="label-esp">Data da Consulta: </label>
+                            <select name="dia-semana" class="sel-especialidade" onchange="this.form.submit()">
+                              <option value="">Todas</option>
+                              <option value="Segunda-feira" {% if request.GET.data_consulta == "Segunda-feira" %}selected{% endif %}>Segunda-feira</option>
+                              <option value="Terça-feira" {% if request.GET.data_consulta == "Terça-feira" %}selected{% endif %}>Terça-feira</option>
+                              <option value="Quarta-feira" {% if request.GET.data_consulta == "Quarta-feira" %}selected{% endif %}>Quarta-feira</option>
+                              <option value="Quinta-feira" {% if request.GET.data_consulta == "Quinta-feira" %}selected{% endif %}>Quinta-feira</option>
+                              <option value="Quarta-feira" {% if request.GET.data_consulta == "Sexta-feira" %}selected{% endif %}>Sexta-feira</option>
+                          </select>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="desmarcar">
-              <button class="btn-desmarcar" alt="Selecione uma consulta da tabela para desmarcar">Desmarcar consulta</button>
-            </div>
-            
-          </div>
           
-          <div class="tabela">
-            <table class="table">
-              <thead id="cabecalho">
-                <tr>
-                  <th></th>
-                  <th scope="col">ID</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Data e horário</th>
-                  <th scope="col">Telefone</th>
-                  <th scope="col">E-mail</th>
-                  <th scope="col">Prioridade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for paciente in pacientes %}
-                  <tr class="dados-paciente">
-                    <td><input type="checkbox"></td>
-                    <th scope="row">{{ paciente.pk }}</th>
-                    <td>{{ paciente.nome }}</td>
-                    <td>{{ paciente.data_nascimento }}</td>
-                    <td> {{ paciente.telefone }} </td>
-                    <td> {{ paciente.email }} </td>
-                    <td> {{ paciente.prioridade }} </td>
-                  </tr>          
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-            
-            
+            <div class="tabela">
+                <table class="table">
+                    <thead id="cabecalho">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Data e horário</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Especialidade</th>
+                            <th scope="col">Pagamento</th>
+                            <th scope="col">Prioridade</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes %}
+                            <tr class="dados-paciente">
+                                <th scope="row">{{ paciente.pk }}</th>
+                                <td>{{ paciente.nome }}</td>
+                                <td>{{ paciente.data_consulta }}</td>
+                                <td>{{ paciente.telefone }}</td>
+                                <td>{{ paciente.email }}</td>
+                                <td>{{ paciente.especialidade }}</td>
+                                <td>{{ paciente.forma_pagamento }}</td>
+                                <td>{{ paciente.prioridade }}</td>
+                                <td>
+                                    <button class="btn-desmarcar" alt="desmarcar">Desmarcar</button>
+                                    <button class="btn-ficha" alt="Ficha do paciente">Dados</button>
+                                </td>
+                            </tr>          
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

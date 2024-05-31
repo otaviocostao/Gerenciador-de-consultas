@@ -2,6 +2,7 @@
 
 body{
     margin: 0;
+    padding: 0;
     font-family: 'Noto-Sans', sans-serif;
 }
 
@@ -51,16 +52,53 @@ body{
     display: inline-block;
     background: #f6f6f6;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.377);
+    overflow-x: auto;
+}
+
+.titulo-campo{
+    margin-left: 1vw;
+    font-size: 20pt;
+}
+
+.form-botao{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-salvar{
-    width: 10vw;
+    width: 13vw;
     font-size: 12pt;
-    padding: 7px;
+    padding: 10px;
     color: white;
     background-color: #005dcb;
     border: none;
     border-radius: 20px;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.377);
     cursor: pointer;
+    margin-bottom: 1vh;
+}
+
+.btn-salvar:hover{
+    background-color: #3175c8;
+}
+
+.form-group {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input, .form-group select {
+    width: 95%;
+    margin: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14pt;
 }

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView
 from gerenciador.models import Paciente
 from django.urls import reverse_lazy
 # Create your views here.
@@ -12,15 +12,27 @@ class HomeTemplateView(TemplateView):
 
 class AgendarPaciente(CreateView):
     model=Paciente
-    fields=['nome', 'endereco', 'cpf', 'rg', 'telefone', 'email', 'prioridade', 'data_nascimento']
+    fields=['nome', 'endereco', 'cpf', 'rg', 'telefone', 'email', 'data_nascimento', 'prioridade', 'especialidade', 'data_consulta', 'convenio_medico', 'forma_pagamento']
     template_name='gerenciador/agendar.html'
     def get_success_url(self):
         return reverse_lazy('dados_consulta', kwargs={'pk': self.object.pk})
 
-class ListaPacientes(ListView):
-    model=Paciente
-    template_name='gerenciador/ver_consultas.html'
-    context_object_name = 'pacientes'
+def ver_consultas(request):
+    especialidade = request.GET.get('especialidade')
+    data_consulta = request.GET.get('data_consulta')
+    
+    # Filtragem inicial de todos os pacientes
+    pacientes = Paciente.objects.all()
+    
+    # Filtragem por especialidade, se especificada
+    if especialidade:
+        pacientes = pacientes.filter(especialidade=especialidade)
+    
+    # Filtragem por data de consulta, se especificada
+    if data_consulta:
+        pacientes = pacientes.filter(data_consulta=data_consulta)
+    
+    return render(request, 'gerenciador/ver_consultas.html', {'pacientes': pacientes})
 
 class DadosConsulta(DetailView):
     model= Paciente
