@@ -30,7 +30,7 @@
       </div>
 
       <div class="user">
-        <h1>Bem vindo, usuário</h1>
+        <h1>Bem vindo, {{ user.first_name }}</h1>
         <img src="{% static 'img/user.svg' %}" alt="usuario">
         <button id="btn-sair">Desconectar</button>
       </div>

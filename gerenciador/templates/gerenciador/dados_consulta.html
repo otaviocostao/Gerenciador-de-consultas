@@ -16,9 +16,9 @@
                 <div class="div-mensagem">
                     <div id="conteudo-mensagem">
                         <h1>Consulta marcada!</h1>
-                        <p>A consulta na especialidade: </p>
+                        <p>A consulta na especialidade: {{ paciente.especialidade }} </p>
                         <p>Para o paciente: {{ paciente.nome }}</p>
-                        <p>Data: </p>
+                        <p>Dia: {{ paciente.data_consulta }} </p>
                         <p>Está marcada na agenda de consultas.</p>
                     </div>
                 </div>

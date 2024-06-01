@@ -2,13 +2,30 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 from gerenciador.models import Paciente
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def login(request):
-    return render(request, 'gerenciador/login.html')
+    if request.method == "GET":
+        return render(request, 'gerenciador/login.html')
+    else:
+        username = request.POST.get('username')
+        senha = request.POST.get('senha')
 
-class HomeTemplateView(TemplateView):
+        user = authenticate(username=username, password=senha)
+
+        if user:
+            auth_login(request, user)
+            return redirect(reverse_lazy('home'))
+        else:
+            return render(request, 'gerenciador/login.html', {'error': 'Usuário ou senha inválidos'})
+
+class HomeTemplateView(LoginRequiredMixin, TemplateView):
     template_name= "gerenciador/home.html"
+    login_url= 'login'
+    redirect_field_name= 'redirect_to'
 
 class AgendarPaciente(CreateView):
     model=Paciente

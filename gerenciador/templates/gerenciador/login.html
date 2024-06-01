@@ -9,24 +9,24 @@
 </head>
 <body>
     <div class="main-login">
-        <div class="left-login">
-            <h1>Seja bem-vindo!<br>Faça login para acessar a plataforma.</h1>
-            <img src="{%static 'img/calendario.svg'%}" class="left-login-img" alt="img">
-        </div>
-
         <div class="right-login">
             <div class="card-login">
                 <h1>LOGIN</h1>
-                <div class="textfield">
-                    <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" placeholder="Usuário">
-                </div>
-                <div class="textfield">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" placeholder="Senha">
-                </div>
-
-                <button class="btn-login">Login</button>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="textfield">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" placeholder="Usuário" required>
+                    </div>
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="password" name="senha" placeholder="Senha" required>
+                    </div>
+                    <button type="submit" class="btn-login">Login</button>
+                </form>
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
             </div>
         </div>
 
