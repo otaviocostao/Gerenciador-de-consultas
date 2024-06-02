@@ -10,8 +10,12 @@
 <body>
   <div class="main-home">
     <div class="navbar">
-      <img src="{% static 'img/agenda.svg' %}" alt="usuario">
-      <h1>Gerenciador de consultas</h1>
+      <div id="logo-div">
+        <img src="{% static 'img/agenda.svg' %}" alt="logo">
+        <h1>Gerenciador de consultas</h1>
+      </div>
+      <a href="{% url 'login' %}"><button id="btn-sair">Desconectar</button></a>
+      
     </div>
     <div class="content-div">
       <div class="painel-botoes">
@@ -24,15 +28,10 @@
         <a href="">
           <button class="btn-home">Fila de espera</button>
         </a>
-        <a href="">
-          <button class="btn-home">Ajustes das consultas</button>
-         </a>
       </div>
 
-      <div class="user">
-        <h1>Bem vindo, {{ user.first_name }}</h1>
-        <img src="{% static 'img/user.svg' %}" alt="usuario">
-        <button id="btn-sair">Desconectar</button>
+      <div class="consultas">
+
       </div>
     </div>
   </div>

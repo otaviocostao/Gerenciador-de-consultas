@@ -46,6 +46,18 @@ body *{
     font-size: 25pt;
 }
 
+#logo-div{
+    display: flex;
+    color: #005dcb;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 12pt;
+}
+
+#logo-div > h1{
+    margin-left: 10px;
+}
+
 .textfield{
     width: 100%;
     display: flex;

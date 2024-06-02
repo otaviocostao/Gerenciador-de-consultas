@@ -11,7 +11,10 @@
     <div class="main-login">
         <div class="right-login">
             <div class="card-login">
-                <h1>LOGIN</h1>
+                <div id="logo-div">
+                    <img src="{% static 'img/agenda.svg' %}" alt="logo">
+                    <h1>CONSULTAS</h1>
+                </div>
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="textfield">
