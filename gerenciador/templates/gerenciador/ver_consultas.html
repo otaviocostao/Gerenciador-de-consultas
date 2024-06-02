@@ -17,19 +17,19 @@
             <div class="painel">
                 <div class="filtros">
                     <form method="GET" action="{% url 'consultas' %}">
-                        <div>
+                        <div class="field-filtro">
                             <label for="especialidade" class="label-esp">Especialidade: </label>
-                            <select name="especialidade" class="sel-especialidade" onchange="this.form.submit()">
+                            <select name="especialidade" class="sel-especialidade" id="id_especialidade" onchange="this.form.submit()">
                                 <option value="">Todas</option>
                                 <option value="Clinico Geral" {% if request.GET.especialidade == "Clinico Geral" %}selected{% endif %}>Clinico Geral</option>
                                 <option value="Oftalmologista" {% if request.GET.especialidade == "Oftalmologista" %}selected{% endif %}>Oftalmologista</option>
                                 <option value="Dermatologista" {% if request.GET.especialidade == "Dermatologista" %}selected{% endif %}>Dermatologista</option>
                             </select>
                         </div>
-                        <div>
-                            <label for="data_consulta" class="label-esp">Data da Consulta: </label>
-                            <select name="data_consulta" class="sel-especialidade" onchange="this.form.submit()">
-                                <option value="">Todas</option>
+                        <div class="field-filtro">
+                            <label for="data_consulta" class="label-esp">Dia da Consulta: </label>
+                            <select name="data_consulta" class="sel-especialidade" id="id_data_consulta" onchange="this.form.submit()">
+                                <option value="">Todos</option>
                                 <option value="Segunda-feira" {% if request.GET.data_consulta == "Segunda-feira" %}selected{% endif %}>Segunda-feira</option>
                                 <option value="Terça-feira" {% if request.GET.data_consulta == "Terça-feira" %}selected{% endif %}>Terça-feira</option>
                                 <option value="Quarta-feira" {% if request.GET.data_consulta == "Quarta-feira" %}selected{% endif %}>Quarta-feira</option>
@@ -78,5 +78,44 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const especialidadeField = document.getElementById("id_especialidade");
+            const dataConsultaField = document.getElementById("id_data_consulta");
+
+            function updateDataConsultaOptions() {
+                const selectedEspecialidade = especialidadeField.value;
+                const allOptions = dataConsultaField.querySelectorAll("option");
+
+                allOptions.forEach(option => {
+                    option.style.display = "none";
+                });
+
+                if (selectedEspecialidade === "Clinico Geral") {
+                    showOptions(["Todos", "Segunda-feira", "Terça-feira"]);
+                } else if (selectedEspecialidade === "Oftalmologista") {
+                    showOptions(["Todos", "Quarta-feira", "Quinta-feira"]);
+                } else if (selectedEspecialidade === "Dermatologista") {
+                    showOptions(["Todos", "Sexta-feira"]);
+                }else if(selectedEspecialidade === ""){
+                    showOptions(["Todos", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"])
+                }
+            }
+
+            function showOptions(days) {
+                const allOptions = dataConsultaField.querySelectorAll("option");
+                allOptions.forEach(option => {
+                    if (days.includes(option.textContent)) {
+                        option.style.display = "block"; 
+                    }
+                });
+            }
+
+            especialidadeField.addEventListener("change", updateDataConsultaOptions);
+
+            updateDataConsultaOptions();
+        });
+    </script>
 </body>
 </html>

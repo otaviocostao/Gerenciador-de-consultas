@@ -19,6 +19,11 @@ from django.urls import path
 from gerenciador.views import HomeTemplateView, AgendarPaciente, DadosConsulta, EditarFicha
 from gerenciador import views
 
+# ROTAS URL DO PROJETO
+# CADA VIEW CRIADA NO VIEWS.PY PRECISA DE UMA ROTA URL PARA SER ACESSADA
+# APÓS CRIAR A VIEW É NECESSÁRIO PASSAR COMO PARAMETRO AQUI NO CAMPO URLPATTERNS
+# AQUI É POSSIVEL NOMEAR CADA ROTA DE PAGINA DO SITE NO URL
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login, name='login'),

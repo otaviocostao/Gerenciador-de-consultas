@@ -1,9 +1,13 @@
 from django.db import models
 
-# Create your models here.
+# NO ARQUIVO MODELS.PY É POSSIVEL CRIAR AS TABELAS DO BANCO SQLITE3
+# CADA TABELA DO BANCO DE DADOS É PASSADA NESSE ARQUIVO COMO UMA CLASSE
+# BASTA CRIAR AQUI UMA CLASSE QUE HERDE DE 'MODELS.MODEL'
+
 class Paciente(models.Model):
 
-    ESPECIALIDADE_UM = 'Clinico Geral'
+    # DIAS DA SEMANA PARA FAZER A SELECT BOX NO HTML
+    ESPECIALIDADE_UM = 'Clinico Geral' 
     ESPECIALIDADE_DOIS = 'Oftalmologista'
     ESPECIALIDADE_TRES = 'Dermatologista'
 
@@ -13,6 +17,7 @@ class Paciente(models.Model):
         (ESPECIALIDADE_TRES, 'Dermatologista'),
     ]
 
+    # OPCÕES SIM E NAO PARA CRIAÇÃO DE SELECT BOX NO HTML
     OPTION_SIM = 'Sim'
     OPTION_NAO = 'Não'
 
@@ -20,6 +25,8 @@ class Paciente(models.Model):
         (OPTION_SIM, 'Sim'),
         (OPTION_NAO, 'Não'),
     ]
+
+    # FORMAS DE PAGAMENTO PARA SELECT BOX NO HTML 
 
     PAGAMENTO_UM = 'Dinheiro'
     PAGAMENTO_DOIS = 'Cartão de credito'
@@ -32,6 +39,8 @@ class Paciente(models.Model):
         (PAGAMENTO_TRES, 'Cartão de debito'),
         (PAGAMENTO_QUATRO, 'Convênio médico'),
     ]
+
+    # DIAS DA SEMANA PARA CRIAR SELECT BOX NO HTML
 
     DIA_SEGUNDA = 'Segunda-feira'
     DIA_TERCA = 'Terça-feira'
@@ -46,6 +55,11 @@ class Paciente(models.Model):
         (DIA_QUINTA, 'Quinta-feira'),
         (DIA_SEXTA, 'Sexta-feira'),
     ]
+
+    # CAMPOS DO BANCO DE DADOS
+    # CADA VARIAVEL ABAIXO RECEBE A TIPAGEM E OS PARAMETROS PARA A CRIAÇÃO DA COLUNA NA DB
+
+    # Dados do paciente:
 
     nome = models.CharField(max_length=100,null=False, blank=False)
 
@@ -72,3 +86,6 @@ class Paciente(models.Model):
     convenio_medico = models.CharField(max_length=50, null=False, blank=False, choices=OPTION_CHOICES, default=OPTION_NAO)
 
     forma_pagamento = models.CharField(max_length=50, null=False, blank=False, choices=PAGAMENTO_CHOICES, default=PAGAMENTO_UM)
+
+    # APÓS CRIAR SUA CLASSE DA MODEL BASTA GERAR A MIGRAÇÃO NO TERMINAL
+    # APÓS CRIAR A MIGRAÇÃO BASTA MIGRAR TAMBEM PELO TERMINAL
