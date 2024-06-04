@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ver_fila_style.css' %}">
+    <title>Fila de espera</title>
+</head>
+<body>
+    <div class="consultas-main">
+        <div class="nav-bar">
+            <a href="{% url 'home' %}"><img src="{% static 'img/retornar.svg' %}" alt="Voltar" class="btn-voltar"></a>
+            <h1>Fila de espera</h1>
+        </div>
+        <div class="content-consultas">
+            <div class="painel">
+                <div class="filtros">
+                    <form method="GET" action="{% url 'fila_espera' %}">
+                        <div class="field-filtro">
+                            <label for="especialidade" class="label-esp">Especialidade: </label>
+                            <select name="especialidade" class="sel-especialidade" id="id_especialidade" onchange="this.form.submit()">
+                                <option value="">Todas</option>
+                                <option value="Clinico Geral" {% if request.GET.especialidade == "Clinico Geral" %}selected{% endif %}>Clinico Geral</option>
+                                <option value="Oftalmologista" {% if request.GET.especialidade == "Oftalmologista" %}selected{% endif %}>Oftalmologista</option>
+                                <option value="Dermatologista" {% if request.GET.especialidade == "Dermatologista" %}selected{% endif %}>Dermatologista</option>
+                            </select>
+                        </div>
+                        <div class="field-filtro">
+                            <label for="data_consulta" class="label-esp">Dia da Consulta: </label>
+                            <select name="data_consulta" class="sel-especialidade" id="id_data_consulta" onchange="this.form.submit()">
+                                <option value="">Todos</option>
+                                <option value="Segunda-feira" {% if request.GET.data_consulta == "Segunda-feira" %}selected{% endif %}>Segunda-feira</option>
+                                <option value="Terça-feira" {% if request.GET.data_consulta == "Terça-feira" %}selected{% endif %}>Terça-feira</option>
+                                <option value="Quarta-feira" {% if request.GET.data_consulta == "Quarta-feira" %}selected{% endif %}>Quarta-feira</option>
+                                <option value="Quinta-feira" {% if request.GET.data_consulta == "Quinta-feira" %}selected{% endif %}>Quinta-feira</option>
+                                <option value="Sexta-feira" {% if request.GET.data_consulta == "Sexta-feira" %}selected{% endif %}>Sexta-feira</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          
+            <div class="tabela">
+                <table class="table">
+                    <thead id="cabecalho">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Data e horário</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Especialidade</th>
+                            <th scope="col">Pagamento</th>
+                            <th scope="col">Prioridade</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes_fila %}
+                            <tr class="dados-paciente">
+                                <th scope="row">{{ paciente.pk }}</th>
+                                <td>{{ paciente.nome }}</td>
+                                <td>{{ paciente.data_consulta }}</td>
+                                <td>{{ paciente.telefone }}</td>
+                                <td>{{ paciente.email }}</td>
+                                <td>{{ paciente.especialidade }}</td>
+                                <td>{{ paciente.forma_pagamento }}</td>
+                                <td>{{ paciente.prioridade }}</td>
+                                <td>
+                                    <a href="{% url 'desmarcar' pk=paciente.pk %} "><button class="btn-desmarcar" alt="desmarcar">Desmarcar</button></a>
+                                    <a href="{% url 'editar' pk=paciente.pk %}"><button class="btn-ficha" alt="Ficha do paciente">Editar</button></a>
+                                </td>
+                            </tr>          
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const especialidadeField = document.getElementById("id_especialidade");
+            const dataConsultaField = document.getElementById("id_data_consulta");
+
+            function updateDataConsultaOptions() {
+                const selectedEspecialidade = especialidadeField.value;
+                const allOptions = dataConsultaField.querySelectorAll("option");
+
+                allOptions.forEach(option => {
+                    option.style.display = "none";
+                });
+
+                if (selectedEspecialidade === "Clinico Geral") {
+                    showOptions(["Todos", "Segunda-feira", "Terça-feira"]);
+                } else if (selectedEspecialidade === "Oftalmologista") {
+                    showOptions(["Todos", "Quarta-feira", "Quinta-feira"]);
+                } else if (selectedEspecialidade === "Dermatologista") {
+                    showOptions(["Todos", "Sexta-feira"]);
+                }else if(selectedEspecialidade === ""){
+                    showOptions(["Todos", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"])
+                }
+            }
+
+            function showOptions(days) {
+                const allOptions = dataConsultaField.querySelectorAll("option");
+                allOptions.forEach(option => {
+                    if (days.includes(option.textContent)) {
+                        option.style.display = "block"; 
+                    }
+                });
+            }
+
+            especialidadeField.addEventListener("change", updateDataConsultaOptions);
+
+            updateDataConsultaOptions();
+        });
+    </script>
+</body>
+</html>

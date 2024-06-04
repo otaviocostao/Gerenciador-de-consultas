@@ -20,77 +20,77 @@
                     <h1 class="titulo-campo">Dados do paciente:</h1>
                     {{ form.non_field_errors }}
                     <div class="form-group">
-                        <label for="id_nome">Nome:</label>
-                        {{ form.nome.errors }}
-                        {{ form.nome }}
+                        <label for="id_nome_fila">Nome:</label>
+                        {{ form.nome_fila.errors }}
+                        {{ form.nome_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_endereco">Endereço:</label>
-                        {{ form.endereco.errors }}
-                        {{ form.endereco }}
+                        <label for="id_endereco_fila">Endereço:</label>
+                        {{ form.endereco_fila.errors }}
+                        {{ form.endereco_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_cpf">CPF:</label>
-                        {{ form.cpf.errors }}
-                        {{ form.cpf }}
+                        <label for="id_cpf_fila">CPF:</label>
+                        {{ form.cpf_fila.errors }}
+                        {{ form.cpf_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_rg">RG:</label>
-                        {{ form.rg.errors }}
-                        {{ form.rg }}
+                        <label for="id_rg_fila">RG:</label>
+                        {{ form.rg_fila.errors }}
+                        {{ form.rg_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_telefone">Telefone:</label>
-                        {{ form.telefone.errors }}
-                        {{ form.telefone }}
+                        <label for="id_telefone_fila">Telefone:</label>
+                        {{ form.telefone_fila.errors }}
+                        {{ form.telefone_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_email">Email:</label>
-                        {{ form.email.errors }}
-                        {{ form.email }}
+                        <label for="id_email_fila">Email:</label>
+                        {{ form.email_fila.errors }}
+                        {{ form.email_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_data_nascimento">Data de Nascimento:</label>
-                        {{ form.data_nascimento.errors }}
-                        {{ form.data_nascimento }}
+                        <label for="id_data_nascimento_fila">Data de Nascimento:</label>
+                        {{ form.data_nascimento_fila.errors }}
+                        {{ form.data_nascimento_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_prioridade">Prioridade:</label>
-                        {{ form.prioridade.errors }}
-                        {{ form.prioridade }}
+                        <label for="id_prioridade_fila">Prioridade:</label>
+                        {{ form.prioridade_fila.errors }}
+                        {{ form.prioridade_fila }}
                     </div>
                     
                     <h1 class="titulo-campo">Dados da consulta:</h1>
 
                     <div class="form-group">
-                        <label for="id_especialidade">Especialidade:</label>
-                        {{ form.especialidade.errors }}
-                        {{ form.especialidade }}
+                        <label for="id_especialidade_fila">Especialidade:</label>
+                        {{ form.especialidade_fila.errors }}
+                        {{ form.especialidade_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_data_consulta">Data da Consulta:</label>
-                        {{ form.data_consulta.errors }}
-                        {{ form.data_consulta }}
+                        <label for="id_data_consulta_fila">Data da Consulta:</label>
+                        {{ form.data_consulta_fila.errors }}
+                        {{ form.data_consulta_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_convenio_medico">Convênio Médico:</label>
-                        {{ form.convenio_medico.errors }}
-                        {{ form.convenio_medico }}
+                        <label for="id_convenio_medico_fila">Convênio Médico:</label>
+                        {{ form.convenio_medico_fila.errors }}
+                        {{ form.convenio_medico_fila }}
                     </div>
                     
                     <div class="form-group">
-                        <label for="id_forma_pagamento">Forma de Pagamento:</label>
-                        {{ form.forma_pagamento.errors }}
-                        {{ form.forma_pagamento }}
+                        <label for="id_forma_pagamento_fila">Forma de Pagamento:</label>
+                        {{ form.forma_pagamento_fila.errors }}
+                        {{ form.forma_pagamento_fila }}
                     </div>
 
                     <div class="form-botao">
@@ -103,8 +103,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const especialidadeField = document.getElementById("id_especialidade");
-            const dataConsultaField = document.getElementById("id_data_consulta");
+            const especialidadeField = document.getElementById("id_especialidade_fila");
+            const dataConsultaField = document.getElementById("id_data_consulta_fila");
             const form = document.getElementById("formulario");
 
             function updateDataConsultaOptions() {
@@ -133,43 +133,30 @@
                 });
             }
 
-            // Adiciona um evento de escuta para o evento de envio do formulário
             form.addEventListener("submit", function(event) {
-                // Impede o comportamento padrão do envio do formulário
                 event.preventDefault();
-                
-                // Coleta os dados do formulário em um objeto FormData
                 const formData = new FormData(form);
-
-                // Envia uma requisição fetch para a URL de destino do formulário
                 fetch(form.action, {
-                    method: form.method,  // Método HTTP usado para a requisição (POST)
-                    body: formData,  // Corpo da requisição contendo os dados do formulário
+                    method: form.method,
+                    body: formData,
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',  // Indica que é uma requisição AJAX
-                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')  // Token CSRF para proteção contra CSRF
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
                     }
                 }).then(response => response.json()).then(data => {
-                    // Manipula a resposta da requisição AJAX convertendo-a em JSON
                     if (data.limit_reached) {
-                        // Se o limite de consultas foi atingido, exibe um alerta para o usuário
                         if (confirm("Limite de consultas atingido para essa especialidade e data. Deseja ser redirecionado para a fila de espera?")) {
-                            // Redireciona o usuário para a fila de espera
                             window.location.href = "{% url 'agendar_fila' %}";
                         } else {
-                            // Redireciona o usuário para a página inicial
                             window.location.href = "{% url 'home' %}";
                         }
                     } else {
-                        // Se não houver erro na submissão, redireciona para a URL retornada pela API
-                        window.location.href = data.redirect_url;
+                        form.submit();
                     }
                 }).catch(error => {
-                    // Se ocorrer um erro durante a requisição AJAX, exibe no console do navegador
                     console.error('Error:', error);
                 });
             });
-
 
             especialidadeField.addEventListener("change", updateDataConsultaOptions);
 
