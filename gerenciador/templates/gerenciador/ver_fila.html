@@ -69,7 +69,7 @@
                                 <td>{{ paciente.prioridade }}</td>
                                 <td>
                                     <a href="{% url 'desmarcar' pk=paciente.pk %} "><button class="btn-desmarcar" alt="desmarcar">Desmarcar</button></a>
-                                    <a href="{% url 'editar' pk=paciente.pk %}"><button class="btn-ficha" alt="Ficha do paciente">Editar</button></a>
+                                    <a href="{% url 'editar_fila' pk=paciente.pk %}"><button class="btn-ficha" alt="Ficha do paciente">Editar</button></a>
                                 </td>
                             </tr>          
                         {% endfor %}

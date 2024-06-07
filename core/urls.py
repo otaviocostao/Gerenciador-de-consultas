@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from gerenciador.views import HomeTemplateView, AgendarPaciente, DadosConsulta, EditarFicha, Agendar_Fila
+from gerenciador.views import HomeTemplateView, AgendarPaciente, DadosConsulta, EditarFicha, Agendar_Fila, EditarFichaFila
 from gerenciador import views
 
 # ROTAS URL DO PROJETO
@@ -35,4 +35,5 @@ urlpatterns = [
     path('desmarcar/<int:pk>/', views.desmarcar_consulta, name='desmarcar'),
     path('agendar_fila/', Agendar_Fila.as_view(), name='agendar_fila'),
     path('filaespera/', views.ListarFiladeEspera, name='fila_espera'),
+    path('editarfila/<int:pk>/', EditarFichaFila.as_view(), name='editar_fila')
 ]

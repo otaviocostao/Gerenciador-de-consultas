@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'cadastro_style.css' %}">  
+        <title>Ficha do paciente</title>
+    </head>
+    <body>
+        <div class="main-agendar">
+            <div class="navbar">
+                <a href="{% url 'fila_espera' %}"><img src="{% static 'img/retornar.svg' %}" alt="Voltar" class="btn-voltar"></a>
+                <h1>Ficha do paciente</h1>
+            </div>
+            <div class="painel-cadastro">
+                <div id="card-formulario">
+                    <form id="formulario" method="POST">
+                        {% csrf_token %}
+                        <h1 class="titulo-campo">Dados do paciente:</h1>
+                        <div class="form-group">
+                            <label for="id_nome_fila">Nome:</label>
+                            {{ form.nome_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_endereco_fila">Endereço:</label>
+                            {{ form.endereco_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_cpf_fila">CPF:</label>
+                            {{ form.cpf_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_rg_fila">RG:</label>
+                            {{ form.rg_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_telefone_fila">Telefone:</label>
+                            {{ form.telefone_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_email_fila">Email:</label>
+                            {{ form.email_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_data_nascimento_fila">Data de Nascimento:</label>
+                            {{ form.data_nascimento_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_prioridade_fila">Prioridade:</label>
+                            {{ form.prioridade_fila }}
+                        </div>
+                        
+                        <h1 class="titulo-campo">Dados da consulta:</h1>
+
+                        <div class="form-group">
+                            <label for="id_especialidade_fila">Especialidade:</label>
+                            {{ form.especialidade_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_data_consulta_fila">Data da Consulta:</label>
+                            {{ form.data_consulta_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_convenio_medico_fila">Convênio Médico:</label>
+                            {{ form.convenio_medico_fila }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="id_forma_pagamento_fila">Forma de Pagamento:</label>
+                            {{ form.forma_pagamento_fila }}
+                        </div>
+
+
+                        <div class="form-botao">
+                            <button type="submit" class="btn-salvar">Salvar alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const especialidadeField = document.getElementById("id_especialidade_fila");
+                const dataConsultaField = document.getElementById("id_data_consulta_fila");
+    
+                function updateDataConsultaOptions() {
+                    const selectedEspecialidade = especialidadeField.value;
+                    const allOptions = dataConsultaField.querySelectorAll("option");
+    
+                    allOptions.forEach(option => {
+                        option.style.display = "none";
+                    });
+    
+                    if (selectedEspecialidade === "Clinico Geral") {
+                        showOptions(["Segunda-feira", "Terça-feira"]);
+                    } else if (selectedEspecialidade === "Oftalmologista") {
+                        showOptions(["Quarta-feira", "Quinta-feira"]);
+                    } else if (selectedEspecialidade === "Dermatologista") {
+                        showOptions(["Sexta-feira"]);
+                    }
+                }
+    
+                function showOptions(days) {
+                    const allOptions = dataConsultaField.querySelectorAll("option");
+                    allOptions.forEach(option => {
+                        if (days.includes(option.textContent)) {
+                            option.style.display = "block"; 
+                        }
+                    });
+                }
+    
+                especialidadeField.addEventListener("change", updateDataConsultaOptions);
+    
+                updateDataConsultaOptions();
+            });
+        </script>
+    </body>
+</html>

@@ -80,42 +80,55 @@
     </div>
 
     <script>
+        // Adiciona um evento que será executado quando o conteúdo da página estiver completamente carregado
         document.addEventListener("DOMContentLoaded", function() {
+            // Obtém os elementos do campo de especialidade e de data de consulta
             const especialidadeField = document.getElementById("id_especialidade");
             const dataConsultaField = document.getElementById("id_data_consulta");
-
+    
+            // Função para atualizar as opções de data de consulta com base na especialidade selecionada
             function updateDataConsultaOptions() {
+                // Obtém o valor da especialidade selecionada
                 const selectedEspecialidade = especialidadeField.value;
+                // Obtém todas as opções do campo de data de consulta
                 const allOptions = dataConsultaField.querySelectorAll("option");
-
+    
+                // Oculta todas as opções inicialmente
                 allOptions.forEach(option => {
                     option.style.display = "none";
                 });
-
+    
+                // Mostra as opções apropriadas com base na especialidade selecionada
                 if (selectedEspecialidade === "Clinico Geral") {
                     showOptions(["Todos", "Segunda-feira", "Terça-feira"]);
                 } else if (selectedEspecialidade === "Oftalmologista") {
                     showOptions(["Todos", "Quarta-feira", "Quinta-feira"]);
                 } else if (selectedEspecialidade === "Dermatologista") {
                     showOptions(["Todos", "Sexta-feira"]);
-                }else if(selectedEspecialidade === ""){
-                    showOptions(["Todos", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"])
+                } else if (selectedEspecialidade === "") {
+                    showOptions(["Todos", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]);
                 }
             }
-
+    
+            // Função para mostrar as opções de datas que correspondem aos dias fornecidos
             function showOptions(days) {
+                // Obtém todas as opções do campo de data de consulta
                 const allOptions = dataConsultaField.querySelectorAll("option");
+                // Define o display das opções que estão nos dias fornecidos como "block" para mostrá-las
                 allOptions.forEach(option => {
                     if (days.includes(option.textContent)) {
                         option.style.display = "block"; 
                     }
                 });
             }
-
+    
+            // Adiciona um ouvinte de evento para o campo de especialidade, para chamar a função de atualização quando o valor mudar
             especialidadeField.addEventListener("change", updateDataConsultaOptions);
-
+    
+            // Chama a função de atualização inicialmente para garantir que as opções corretas estejam visíveis ao carregar a página
             updateDataConsultaOptions();
         });
     </script>
+    
 </body>
 </html>
