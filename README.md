@@ -1,7 +1,7 @@
 # Gerenciador de consultas médicas
 
 Sistema Web feito em Python com o framework Django para gerenciamento para clínicas médicas de marcação de consultas com fila de espera.
-O projeto conta com função para agendar consultas para pacientes armazenando as informações em uma base de dados, o sistema possui um limite de consultas a serem marcadas, caso seja atingido o limite de consultas, o usuário é redirecionado para o agendamento na fila de espera. Caso algum paciente agendado desmarque, o primeiro da fila de espera é movido para a lista dos agendados. Fora a função de agendamento também existe a função de listar os pacientes e editar o cadastro dos mesmos.s
+O projeto conta com função para agendar consultas para pacientes armazenando as informações em uma base de dados, o sistema possui um limite de consultas a serem marcadas para cada especialidade e dia, caso seja atingido o limite de consultas, o usuário é redirecionado para o agendamento na fila de espera. Caso algum paciente agendado desmarque, o primeiro da fila de espera é movido para a lista dos agendados. Fora a função de agendamento também existe a função de listar os pacientes e editar o cadastro dos mesmos.
 
 
 ### Criando ambiente virtual:
