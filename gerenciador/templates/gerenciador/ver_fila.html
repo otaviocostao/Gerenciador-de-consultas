@@ -42,39 +42,42 @@
             </div>
           
             <div class="tabela">
-                <table class="table">
-                    <thead id="cabecalho">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Data e horário</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Especialidade</th>
-                            <th scope="col">Pagamento</th>
-                            <th scope="col">Prioridade</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for paciente in pacientes_fila %}
-                            <tr class="dados-paciente">
-                                <th scope="row">{{ paciente.pk }}</th>
-                                <td>{{ paciente.nome }}</td>
-                                <td>{{ paciente.data_consulta }}</td>
-                                <td>{{ paciente.telefone }}</td>
-                                <td>{{ paciente.email }}</td>
-                                <td>{{ paciente.especialidade }}</td>
-                                <td>{{ paciente.forma_pagamento }}</td>
-                                <td>{{ paciente.prioridade }}</td>
-                                <td>
-                                    <a href="{% url 'desmarcar' pk=paciente.pk %} "><button class="btn-desmarcar" alt="desmarcar">Desmarcar</button></a>
-                                    <a href="{% url 'editar_fila' pk=paciente.pk %}"><button class="btn-ficha" alt="Ficha do paciente">Editar</button></a>
-                                </td>
-                            </tr>          
-                        {% endfor %}
-                    </tbody>
-                </table>
+                {% if pacientes_fila %}
+                    <table class="table">
+                        <thead id="cabecalho">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Data e horário</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Especialidade</th>
+                                <th scope="col">Pagamento</th>
+                                <th scope="col">Prioridade</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for paciente in pacientes_fila %}
+                                <tr class="dados-paciente">
+                                    <th scope="row">{{ paciente.pk }}</th>
+                                    <td>{{ paciente.nome_fila }}</td>
+                                    <td>{{ paciente.data_consulta_fila }}</td>
+                                    <td>{{ paciente.telefone_fila }}</td>
+                                    <td>{{ paciente.email_fila }}</td>
+                                    <td>{{ paciente.especialidade_fila }}</td>
+                                    <td>{{ paciente.forma_pagamento_fila }}</td>
+                                    <td>{{ paciente.prioridade_fila }}</td>
+                                    <td>
+                                        <a href="{% url 'editar_fila' pk=paciente.pk %}"><button class="btn-ficha" alt="Ficha do paciente">Editar</button></a>
+                                    </td>
+                                </tr>          
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>Não há pacientes na fila de espera</p>
+                {% endif %}
             </div>
         </div>
     </div>

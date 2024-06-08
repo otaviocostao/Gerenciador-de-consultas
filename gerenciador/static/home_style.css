@@ -68,7 +68,7 @@ body{
     flex-direction: column;
     padding: 5vw;
     background: white;
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 0px 20px 15px rgba(0, 0, 0, 0.123);
 }
 
@@ -90,17 +90,17 @@ body{
     background-color: #3175c8;
 }
 
-.consultas{
+.imagens{
     margin: 10px;
     width: 40vw;
     height: 40vh;
     padding: 5vw;
-    border-radius: 20px;
+    border-radius: 15px;
     background: white;
     box-shadow: 0px 20px 15px rgba(0, 0, 0, 0.123);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    
+ 
     flex-direction: column;
 }
 
@@ -130,3 +130,4 @@ body{
 #btn-sair:hover{
     background: #F6F6F6;
 }
+

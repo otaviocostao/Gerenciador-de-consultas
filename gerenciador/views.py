@@ -96,10 +96,37 @@ class EditarFicha(UpdateView): # VIEW PARA EDITAR A FICHA DO PACIENTE A PARTIR D
     def get_success_url(self): # URL USADA PARA REDIRECIONAR APÓS SALVAR A ALTERAÇÃO
         return reverse_lazy('consultas')
     
-def desmarcar_consulta(request, pk): # FUNÇÃO PARA DESMARCAR A CONSULTA DO PACIENTE
-    paciente = get_object_or_404(Paciente, pk=pk) # PEGANDO O PK DO PACIENTE PELO FOR DA TEMPLATE HTML
-    paciente.delete() # DELETANDO O PACIENTE DO BANCO DE DADOS PELO PRIMARY KEY
-    return redirect('consultas') # REDIRECT PARA A TELA DE CONSULTAS MARCADAS
+def desmarcar_consulta(request, pk): 
+    paciente = get_object_or_404(Paciente, pk=pk) 
+    especialidade = paciente.especialidade
+    data_consulta = paciente.data_consulta
+    paciente.delete()
+
+    # Verifica se há pacientes na fila de espera para a mesma especialidade e data
+    paciente_fila = PacienteFilaEspera.objects.filter(especialidade_fila=especialidade, data_consulta_fila=data_consulta).first()
+
+    if paciente_fila:
+        # Cria um novo paciente com os dados do paciente da fila de espera
+        novo_paciente = Paciente(
+            nome=paciente_fila.nome_fila,
+            endereco=paciente_fila.endereco_fila,
+            cpf=paciente_fila.cpf_fila,
+            rg=paciente_fila.rg_fila,
+            telefone=paciente_fila.telefone_fila,
+            email=paciente_fila.email_fila,
+            data_nascimento=paciente_fila.data_nascimento_fila,
+            prioridade=paciente_fila.prioridade_fila,
+            especialidade=paciente_fila.especialidade_fila,
+            data_consulta=paciente_fila.data_consulta_fila,
+            convenio_medico=paciente_fila.convenio_medico_fila,
+            forma_pagamento=paciente_fila.forma_pagamento_fila
+        )
+        novo_paciente.save()
+
+        # Remove o paciente da fila de espera
+        paciente_fila.delete()
+
+    return redirect('consultas')
 
 class Agendar_Fila(CreateView):
     model = PacienteFilaEspera
@@ -111,12 +138,12 @@ class Agendar_Fila(CreateView):
     ]
 
     def get_success_url(self):
-        return reverse_lazy('dados_consulta', kwargs={'pk': self.object.pk})
+        return reverse_lazy('fila_espera')
 
 
 def ListarFiladeEspera(request):
-    especialidade_fila = request.GET.get('especialidade') # QUERY DA ESPECIALIDADE NA BASE DE DADOS
-    data_consulta_fila = request.GET.get('data_consulta') # QUERY DO DIA NA BASE DE DADOS
+    especialidade_fila = request.GET.get('especialidade_fila') # QUERY DA ESPECIALIDADE NA BASE DE DADOS
+    data_consulta_fila = request.GET.get('data_consulta_fila') # QUERY DO DIA NA BASE DE DADOS
     
     pacientes_fila = PacienteFilaEspera.objects.all() # PUXANDO TODOS OS PACIENTES NA BASE DE DADOS
     
