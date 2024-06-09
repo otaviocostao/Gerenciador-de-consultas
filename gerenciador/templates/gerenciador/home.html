@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'home_style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
     <title>Início - Gerenciador de consultas</title>
 </head>
 <body>
@@ -15,7 +17,6 @@
         <h1>Gerenciador de consultas</h1>
       </div>
       <a href="{% url 'login' %}"><button id="btn-sair">Desconectar</button></a>
-      
     </div>
     <div class="content-div">
       <div class="painel-botoes">
@@ -29,11 +30,21 @@
           <button class="btn-home">Fila de espera</button>
         </a>
       </div>
-
-      <div class="imagens">
-    
+      <div class="calendario">
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.querySelector('.calendario');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',  // Definindo o idioma para português
+      });
+
+      calendar.render();
+    });
+  </script>
 </body>
 </html>
