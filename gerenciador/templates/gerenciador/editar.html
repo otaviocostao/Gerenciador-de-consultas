@@ -61,16 +61,6 @@
                         <h1 class="titulo-campo">Dados da consulta:</h1>
 
                         <div class="form-group">
-                            <label for="id_especialidade">Especialidade:</label>
-                            {{ form.especialidade }}
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="id_data_consulta">Data da Consulta:</label>
-                            {{ form.data_consulta }}
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="id_convenio_medico">Convênio Médico:</label>
                             {{ form.convenio_medico }}
                         </div>
@@ -90,41 +80,6 @@
         </div>
 
         
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const especialidadeField = document.getElementById("id_especialidade");
-                const dataConsultaField = document.getElementById("id_data_consulta");
-    
-                function updateDataConsultaOptions() {
-                    const selectedEspecialidade = especialidadeField.value;
-                    const allOptions = dataConsultaField.querySelectorAll("option");
-    
-                    allOptions.forEach(option => {
-                        option.style.display = "none";
-                    });
-    
-                    if (selectedEspecialidade === "Clinico Geral") {
-                        showOptions(["Segunda-feira", "Terça-feira"]);
-                    } else if (selectedEspecialidade === "Oftalmologista") {
-                        showOptions(["Quarta-feira", "Quinta-feira"]);
-                    } else if (selectedEspecialidade === "Dermatologista") {
-                        showOptions(["Sexta-feira"]);
-                    }
-                }
-    
-                function showOptions(days) {
-                    const allOptions = dataConsultaField.querySelectorAll("option");
-                    allOptions.forEach(option => {
-                        if (days.includes(option.textContent)) {
-                            option.style.display = "block"; 
-                        }
-                    });
-                }
-    
-                especialidadeField.addEventListener("change", updateDataConsultaOptions);
-    
-                updateDataConsultaOptions();
-            });
-        </script>
+        
     </body>
 </html>

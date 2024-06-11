@@ -133,31 +133,6 @@
                 });
             }
 
-            form.addEventListener("submit", function(event) {
-                event.preventDefault();
-                const formData = new FormData(form);
-                fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-                    }
-                }).then(response => response.json()).then(data => {
-                    if (data.limit_reached) {
-                        if (confirm("Limite de consultas atingido para essa especialidade e data. Deseja ser redirecionado para a fila de espera?")) {
-                            window.location.href = "{% url 'agendar_fila' %}";
-                        } else {
-                            window.location.href = "{% url 'home' %}";
-                        }
-                    } else {
-                        form.submit();
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-
             especialidadeField.addEventListener("change", updateDataConsultaOptions);
 
             updateDataConsultaOptions();

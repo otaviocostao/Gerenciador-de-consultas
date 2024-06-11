@@ -97,7 +97,7 @@ class DadosConsulta(LoginRequiredMixin, DetailView): # VIEW DE CONFIRMAÇÃO DA 
 class EditarFicha(LoginRequiredMixin, UpdateView): # VIEW PARA EDITAR A FICHA DO PACIENTE A PARTIR DO SEU ID PRIMARY KEY
     model=Paciente  # TABELA DA BASE DE DADOS
     fields=['nome', 'endereco', 'cpf', 'rg', 'telefone', 'email', 'data_nascimento',
-            'prioridade', 'especialidade', 'data_consulta', 'convenio_medico', 'forma_pagamento'] # CAMPOS DO FORMULARIO HTML
+            'prioridade', 'convenio_medico', 'forma_pagamento'] # CAMPOS DO FORMULARIO HTML
     template_name='gerenciador/editar.html'# PASSAGEM DA TEMPLATE HTML
     login_url= 'login' # REQUISIÇÃO DO LOGIN
     redirect_field_name= 'redirect_to'
@@ -149,7 +149,7 @@ class Agendar_Fila(LoginRequiredMixin, CreateView):
     login_url= 'login' # REQUISIÇÃO DO LOGIN
     redirect_field_name= 'redirect_to'
 
-    def get_success_url(self):
+    def get_success_url(self): # URL USADA PARA REDIRECIONAR APÓS SALVAR A ALTERAÇÃO
         return reverse_lazy('fila_espera')
 
 @login_required(login_url=reverse_lazy('login'))
@@ -173,7 +173,7 @@ def ListarFiladeEspera(request):
 class EditarFichaFila(LoginRequiredMixin, UpdateView): # VIEW PARA EDITAR A FICHA DO PACIENTE A PARTIR DO SEU ID PRIMARY KEY
     model=PacienteFilaEspera  # TABELA DA BASE DE DADOS
     fields=['nome_fila', 'endereco_fila', 'cpf_fila', 'rg_fila', 'telefone_fila', 'email_fila', 'data_nascimento_fila',
-            'prioridade_fila', 'especialidade_fila', 'data_consulta_fila', 'convenio_medico_fila', 'forma_pagamento_fila'] # CAMPOS DO FORMULARIO HTML
+            'prioridade_fila', 'convenio_medico_fila', 'forma_pagamento_fila'] # CAMPOS DO FORMULARIO HTML
     template_name='gerenciador/editar_fila.html'# PASSAGEM DA TEMPLATE HTML
     login_url= 'login' # REQUISIÇÃO DO LOGIN
     redirect_field_name= 'redirect_to'
